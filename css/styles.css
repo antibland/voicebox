@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  padding: 0 1em;
+  line-height: 1.4;
+}
+
+.container,
+.container > div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container {
+  position: relative;
+  border: 3px dashed red;
+  max-width: 100%;
+}
+
+.container > div {
+  flex: 1 1 100%;
+}
+
+.item {
+  background: #555;
+  color: white;
+  padding: 1em;
+  text-align: center;
+  width: 100%;
+}
+
+.two-columns .item {
+  width: 50%;
+}
+
+.three-columns .item {
+  width: calc(100% / 3);
+}
+
+.four-columns .item {
+  width: 25%;
+}
+
+.five-columns .item {
+  width: 20%;
+}
+
+.container:empty {
+  padding: 1em;
+}}
