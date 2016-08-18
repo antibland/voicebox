@@ -16,6 +16,10 @@ code[aria-hidden=true] {
   opacity: 0;
 }
 
+.markup[aria-hidden=true] {
+  outline: none;
+}
+
 body {
   padding: 0 1em;
   line-height: 1.4;
