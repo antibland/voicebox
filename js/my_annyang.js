@@ -1,5 +1,23 @@
-if (annyang) {
+(function() {
+  "use strict";
   var container = $('.container');
+
+  var buttonHandler = function() {
+    $('.no-support').attr('aria-hidden', true);
+    var clicked_text = this.innerHTML;
+
+    if (clicked_text === "two columns") {
+      utils.createColumns(2);
+    } else if (clicked_text === "five columns") {
+      utils.createColumns(5);
+    } else if (clicked_text === "clear") {
+      utils.clear();
+    } else if (clicked_text === "get markup") {
+      utils.getMarkup();
+    }
+  };
+
+  $('button').on('click', buttonHandler);
 
   var utils = {
     numbers: ['one', 'two', 'three', 'four', 'five'],
@@ -21,12 +39,30 @@ if (annyang) {
 
       return html;
     },
+    clear: function() {
+      container.html('');
+      $('.markup')
+        .attr({
+          'aria-hidden': true,
+          'tabindex': -1
+        });
+
+      $('.markup .content').attr('aria-hidden', true);
+    },
     getMarkup: function() {
-      $('.markup .content').text( utils.formatCode(container.html(), true, true) );
+      $('.markup')
+        .attr({
+          'aria-hidden': false,
+          'tabindex': 0
+        });
+
+      $('.markup .content')
+        .text( utils.formatCode(container.html(), true, true) )
+        .attr('aria-hidden', false);
+
       hljs.initHighlighting();
     },
     formatCode: function(code, stripWhiteSpaces, stripEmptyLines) {
-      "use strict";
       var whitespace = ' '.repeat(2); // Default indenting 2 whitespaces
       var currentIndent = 0;
       var char = null;
@@ -61,16 +97,20 @@ if (annyang) {
 
       return result;
     }
-  };
+  }; // end utils
 
-  var commands = {
-    'clear': function() {
-      container.html('');
-    },
-    ':num_columns column(s)': utils.createColumns,
-    'get markup': utils.getMarkup
-  };
+  if (annyang) {
+    var commands = {
+      'clear': utils.clear,
+      ':num_columns column(s)': utils.createColumns,
+      'get markup': utils.getMarkup
+    };
 
-  annyang.addCommands(commands);
-  annyang.start();
-}
+    annyang.addCommands(commands);
+    annyang.start();
+  } else {
+    setTimeout(function() {
+      $('.no-support').attr('aria-hidden', false);
+    });
+  }
+})();

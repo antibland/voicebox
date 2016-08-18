@@ -7,10 +7,43 @@ html, body {
   margin: 0;
 }
 
-body {
+body,
+button {
   font-family: 'Montserrat', sans-serif;
+}
+
+code[aria-hidden=true] {
+  opacity: 0;
+}
+
+body {
   padding: 0 1em;
   line-height: 1.4;
+  max-width: 60em;
+  margin: 0 auto;
+}
+
+button {
+  border: none;
+  background: none;
+  border-bottom: 1px dashed rgba(255, 0, 0, 0.8);
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 0.8em;
+}
+
+a {
+  text-decoration: none;
+  color: #555;
+  border-bottom: 1px dashed rgba(255, 0, 0, 0.8);
+}
+
+a:hover,
+button:focus,
+button:hover {
+  outline: 1px solid rgba(255, 0, 0, 0.8);
+  border-bottom: 1px solid transparent;
 }
 
 .container,
@@ -21,7 +54,7 @@ body {
 
 .container {
   position: relative;
-  border: 3px dashed red;
+  border: 3px dashed rgba(255, 0, 0, 0.8);
   max-width: 100%;
 }
 
@@ -55,4 +88,21 @@ body {
 
 .container:empty {
   padding: 1em;
-}}
+}
+
+.no-support {
+  position: fixed;
+  bottom: -10em;
+  left: 50%;
+  transform: translate(-50%, 0);
+  transition: 1.5s;
+  background: rgba(238, 238, 238, 0.5);
+  width: 100%;
+  padding: 3em;
+  max-width: 60em;
+  box-shadow: 0 -8px 6px -8px rgba(0, 0, 0, 0.3);
+}
+
+.no-support[aria-hidden=false] {
+  transform: translate(-50%, -10em);
+}
